@@ -113,13 +113,15 @@ namespace Project3 {
 		SqlCommand^ SqlCom = gcnew SqlCommand();
 		DataTable^ SqlDt = gcnew DataTable();
 		SqlDataAdapter^ SqlDtA = gcnew SqlDataAdapter();
-		SqlDataReader^ SqlRd = gcnew SqlDataReader();
-		SqlCon->ConnectionString = "Data Source=LAPTOP-ALEX\SQLEXPRESS;Initial Catalog=PhonesFriends;Integrated Security=False";
+		SqlDataReader^ SqlRd;
+		SqlCon->ConnectionString = "Data Source=LAPTOP-ALEX/SQLEXPRESS;Initial Catalog=PhonesFriends;Integrated Security=true";
 		SqlCon->Open();
 		SqlCom->Connection = SqlCon;
 		SqlCom->CommandText = "SELECT FriendName FROM PhonesFriends";
 		SqlRd = SqlCom->ExecuteReader();
 		SqlDt->Load(SqlRd);
+		SqlRd->Close();
+		SqlCon->Close();
 		dataGridView1->DataSource = SqlDt;
 
 	}
