@@ -41,6 +41,8 @@ namespace Project3 {
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ FriendName;
 	private: System::Windows::Forms::Button^ Refreshbtn;
+	private: System::Windows::Forms::DataGridView^ dataGridView2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Phones;
 	protected:
 
 	private:
@@ -59,7 +61,10 @@ namespace Project3 {
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->FriendName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Refreshbtn = (gcnew System::Windows::Forms::Button());
+			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->Phones = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// dataGridView1
@@ -71,7 +76,7 @@ namespace Project3 {
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(333, 378);
+			this->dataGridView1->Size = System::Drawing::Size(294, 124);
 			this->dataGridView1->TabIndex = 0;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
 			// 
@@ -92,16 +97,36 @@ namespace Project3 {
 			this->Refreshbtn->UseVisualStyleBackColor = true;
 			this->Refreshbtn->Click += gcnew System::EventHandler(this, &MyForm::Refreshbtn_Click);
 			// 
+			// dataGridView2
+			// 
+			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->Phones });
+			this->dataGridView2->Location = System::Drawing::Point(383, -2);
+			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->RowHeadersWidth = 51;
+			this->dataGridView2->RowTemplate->Height = 24;
+			this->dataGridView2->Size = System::Drawing::Size(284, 124);
+			this->dataGridView2->TabIndex = 2;
+			// 
+			// Phones
+			// 
+			this->Phones->HeaderText = L"Phones";
+			this->Phones->MinimumWidth = 6;
+			this->Phones->Name = L"Phones";
+			this->Phones->Width = 125;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1381, 377);
+			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->Refreshbtn);
 			this->Controls->Add(this->dataGridView1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
 
 		}
