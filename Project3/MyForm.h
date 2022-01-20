@@ -10,7 +10,7 @@ namespace Project3 {
 	using namespace System::Drawing;
 	using namespace System::Data::Sql;
 	using namespace System::Data::SqlClient;
-//	using namespace System::Data::SqlClient::SqlDataReader;
+
 
 
 	/// <summary>
@@ -38,10 +38,10 @@ namespace Project3 {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	public: System::Windows::Forms::DataGridView^ dataGridView1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ FriendName;
 	private: System::Windows::Forms::Button^ Refreshbtn;
-	private: System::Windows::Forms::DataGridView^ dataGridView2;
+	public: System::Windows::Forms::DataGridView^ dataGridView2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Phones;
 	protected:
 
@@ -99,6 +99,7 @@ namespace Project3 {
 			// 
 			// dataGridView2
 			// 
+			this->dataGridView2->AllowUserToOrderColumns = true;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->Phones });
 			this->dataGridView2->Location = System::Drawing::Point(383, -2);
@@ -134,20 +135,35 @@ namespace Project3 {
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
 	private: System::Void Refreshbtn_Click(System::Object^ sender, System::EventArgs^ e) {
+		//loadDb();
+		SqlConnection^ conn;
+		SqlConnectionStringBuilder^ connStrifBuilder;
 		SqlConnection^ SqlCon = gcnew SqlConnection();
 		SqlCommand^ SqlCom = gcnew SqlCommand();
 		DataTable^ SqlDt = gcnew DataTable();
 		SqlDataAdapter^ SqlDtA = gcnew SqlDataAdapter();
 		SqlDataReader^ SqlRd;
-		SqlCon->ConnectionString = "Data Source=LAPTOP-ALEX/SQLEXPRESS;Initial Catalog=PhonesFriends;Integrated Security=true";
+		SqlCon->ConnectionString = "Data Source= 127.0.0.1;Initial Catalog=dbo.PhonesFriends;Integrated Security=true; Server = localhost";
+		connStrifBuilder = gcnew SqlConnectionStringBuilder();
+		connStrifBuilder->DataSource = "LAPTOP-8IOTANJP\\SQLEXPRESS";
+		connStrifBuilder->InitialCatalog = "FriendsPhones";
+		connStrifBuilder->IntegratedSecurity = true;
 		SqlCon->Open();
 		SqlCom->Connection = SqlCon;
-		SqlCom->CommandText = "SELECT FriendName FROM PhonesFriends";
+		SqlCom->CommandText = "SELECT FriendName FROM FriendNames";
 		SqlRd = SqlCom->ExecuteReader();
 		SqlDt->Load(SqlRd);
+		
+		dataGridView1->DataSource = SqlDt;
+		SqlCom->Connection = SqlCon;
+		SqlCom->CommandText = "SELECT phones FROM phones JOIN FriendNames ON id = idFriend";
+		SqlRd = SqlCom->ExecuteReader();
+		SqlDt->Load(SqlRd);
+		dataGridView2->DataSource = SqlDt;
+
 		SqlRd->Close();
 		SqlCon->Close();
-		dataGridView1->DataSource = SqlDt;
+
 
 	}
 	};
