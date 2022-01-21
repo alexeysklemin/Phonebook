@@ -76,7 +76,7 @@ namespace Project3 {
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
-			this->dataGridView1->Size = System::Drawing::Size(294, 124);
+			this->dataGridView1->Size = System::Drawing::Size(677, 263);
 			this->dataGridView1->TabIndex = 0;
 			this->dataGridView1->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView1_CellContentClick);
 			// 
@@ -102,11 +102,11 @@ namespace Project3 {
 			this->dataGridView2->AllowUserToOrderColumns = true;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) { this->Phones });
-			this->dataGridView2->Location = System::Drawing::Point(383, -2);
+			this->dataGridView2->Location = System::Drawing::Point(695, -2);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->RowHeadersWidth = 51;
 			this->dataGridView2->RowTemplate->Height = 24;
-			this->dataGridView2->Size = System::Drawing::Size(284, 124);
+			this->dataGridView2->Size = System::Drawing::Size(674, 263);
 			this->dataGridView2->TabIndex = 2;
 			// 
 			// Phones
@@ -125,7 +125,7 @@ namespace Project3 {
 			this->Controls->Add(this->Refreshbtn);
 			this->Controls->Add(this->dataGridView1);
 			this->Name = L"MyForm";
-			this->Text = L"MyForm";
+			this->Text = L"Phonebook";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
@@ -135,7 +135,7 @@ namespace Project3 {
 	private: System::Void dataGridView1_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
 	private: System::Void Refreshbtn_Click(System::Object^ sender, System::EventArgs^ e) {
-		//loadDb();
+		
 		SqlConnection^ conn;
 		SqlConnectionStringBuilder^ connStrifBuilder;
 		SqlConnection^ SqlCon = gcnew SqlConnection();
@@ -143,11 +143,7 @@ namespace Project3 {
 		DataTable^ SqlDt = gcnew DataTable();
 		SqlDataAdapter^ SqlDtA = gcnew SqlDataAdapter();
 		SqlDataReader^ SqlRd;
-		SqlCon->ConnectionString = "Data Source= 127.0.0.1;Initial Catalog=dbo.PhonesFriends;Integrated Security=true; Server = localhost";
-		connStrifBuilder = gcnew SqlConnectionStringBuilder();
-		connStrifBuilder->DataSource = "LAPTOP-8IOTANJP\\SQLEXPRESS";
-		connStrifBuilder->InitialCatalog = "FriendsPhones";
-		connStrifBuilder->IntegratedSecurity = true;
+		SqlCon->ConnectionString = "Data Source=127.0.0.1/SQLEXPRESS;Initial Catalog=PhonesFriends;Integrated Security=True";
 		SqlCon->Open();
 		SqlCom->Connection = SqlCon;
 		SqlCom->CommandText = "SELECT FriendName FROM FriendNames";
